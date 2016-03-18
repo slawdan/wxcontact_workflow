@@ -3,6 +3,11 @@ WX Contacts
 
 Alfred workflow to search wanxin contacts.
 
+Download and Install
+---------------------
+
+Goto [release](https://github.com/slawdan/wxcontact_workflow/releases) to download the packaged workflow.
+
 
 ICONS
 ----------
