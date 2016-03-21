@@ -16,10 +16,10 @@ UserinfoTb:
 
 WX_PATH_PAT = r'/Users/*/Library/Application Support/万达集团/万信/*/userdata.db'
 
-FULL_FIELDS_CN = u'中文名,英文名,代码,性别,电话,手机,邮件,地址'
-FULL_FIELDS = 'CnUserName,EnUserName,UserCode,Sex,Tel,Phone,Email,Addr'
-FIELDS_CN = u'中文名,英文名,代码,性别,电话,手机,邮件'
-FIELDS = 'CnUserName,EnUserName,UserCode,Sex,Tel,Phone,Email'
+FULL_FIELDS_CN = u'中文名,英文名,代码,性别,职位,电话,手机,邮件,地址'
+FULL_FIELDS = 'CnUserName,EnUserName,UserCode,Sex,Post,Tel,Phone,Email,Addr'
+FIELDS_CN = u'中文名,英文名,代码,性别,职位,电话,手机,邮件'
+FIELDS = 'CnUserName,EnUserName,UserCode,Sex,Post,Tel,Phone,Email'
 SEARCH_FIELDS=u'中文名,英文名,代码,电话,手机,邮件'
 
 FIELDSET = {
