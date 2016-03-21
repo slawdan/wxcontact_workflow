@@ -1,26 +1,29 @@
 #!/usr/bin/env python
 #encoding: utf-8
 
-import sqlite3
+import os
+import sys
 import glob
 import unicodedata
-import sys
+import sqlite3
 import getopt
 
 '''
-/Users/{username}/Library/Application Support/万达集团/万信/{wxuserid}/userdata.db
+{$HOME}/Library/Application Support/万达集团/万信/{wxuserid}/userdata.db
 
 UserinfoTb:
     UserId,CnUserName,EnUserName,UserCode,Sex,Addr,Post,Tel,Phone,Email,PostCode,Fax,UpdateType,UpdateTime
 '''
 
-WX_PATH_PAT = r'/Users/*/Library/Application Support/万达集团/万信/*/userdata.db'
+HOME = os.getenv('HOME', '/Users/*')
+
+WX_PATH_PAT = HOME + r'/Library/Application Support/万达集团/万信/*/userdata.db'
 
 FULL_FIELDS_CN = u'中文名,英文名,代码,性别,职位,电话,手机,邮件,地址'
-FULL_FIELDS = 'CnUserName,EnUserName,UserCode,Sex,Post,Tel,Phone,Email,Addr'
-FIELDS_CN = u'中文名,英文名,代码,性别,职位,电话,手机,邮件'
-FIELDS = 'CnUserName,EnUserName,UserCode,Sex,Post,Tel,Phone,Email'
-SEARCH_FIELDS=u'中文名,英文名,代码,电话,手机,邮件'
+FULL_FIELDS    = u'CnUserName,EnUserName,UserCode,Sex,Post,Tel,Phone,Email,Addr'
+FIELDS_CN      = u'中文名,英文名,代码,性别,职位,电话,手机,邮件'
+FIELDS         = u'CnUserName,EnUserName,UserCode,Sex,Post,Tel,Phone,Email'
+SEARCH_FIELDS  = u'中文名,英文名,代码,电话,手机,邮件'
 
 FIELDSET = {
         'full': (FULL_FIELDS, FULL_FIELDS_CN),
