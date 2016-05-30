@@ -19,10 +19,10 @@ HOME = os.getenv('HOME', '/Users/*')
 
 WX_PATH_PAT = HOME + r'/Library/Application Support/万达集团/万信/*/userdata.db'
 
-FULL_FIELDS_CN = u'中文名,英文名,代码,性别,职位,电话,手机,邮件,地址'
-FULL_FIELDS    = u'CnUserName,EnUserName,UserCode,Sex,Post,Tel,Phone,Email,Addr'
-FIELDS_CN      = u'中文名,英文名,代码,性别,职位,电话,手机,邮件'
-FIELDS         = u'CnUserName,EnUserName,UserCode,Sex,Post,Tel,Phone,Email'
+FULL_FIELDS_CN = u'中文名,英文名,代码,性别,职位,电话,手机,邮件,地址,部门'
+FULL_FIELDS    = u'u.CnUserName,u.EnUserName,u.UserCode,u.Sex,u.Post,u.Tel,u.Phone,u.Email,u.Addr,d.CnDeptName'
+FIELDS_CN      = u'中文名,代码,性别,职位,电话,手机,邮件,部门'
+FIELDS         = u'u.CnUserName,u.UserCode,u.Sex,u.Post,u.Tel,u.Phone,u.Email,d.CnDeptName'
 SEARCH_FIELDS  = u'中文名,英文名,代码,电话,手机,邮件'
 
 FIELDSET = {
@@ -47,7 +47,7 @@ def open_db(path):
 
 
 def find_users(c, user, f):
-    sql = "select %s from UserinfoTb where CnUserName like :key or EnUserName like :key or UserCode like :key or Tel like :key or Phone like :key or Email like :key order by CnUserName" % f
+    sql = "select %s from UserinfoTb u left join UserDeptInfoTb ud on ud.userid=u.userid left join DeptInfoTb d on d.deptid=ud.deptid where u.CnUserName like :key or u.EnUserName like :key or u.UserCode like :key or u.Tel like :key or u.Phone like :key or u.Email like :key order by u.UserCode" % f
     key = "%" + user + "%"
     c.execute(sql, {"key": key})
     return c.fetchall()
@@ -59,12 +59,14 @@ def trans_sexual(s):
 
 
 def width(s):
+    if not s:
+        return 0
     return sum([2 if unicodedata.east_asian_width(i) in 'WFA' else 1 for i in s])
 
 
 def pad_field(s, w=0):
     ww = width(s)
-    return s + (' ' * (w - ww))
+    return (s if s else u'') + (' ' * (w - ww))
 
 
 def pretty_print(users, f):
