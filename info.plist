@@ -8,6 +8,47 @@
 	<string>Tools</string>
 	<key>connections</key>
 	<dict>
+		<key>16F53546-4FCD-434B-8D13-030103559B92</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CC17CE2E-D952-4F78-85DF-02A7762E53FC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>1AEA6989-27D7-4E59-BF45-32B08DD488A5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>20DED387-7681-45D4-9150-87A249C39B94</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>B513BAD6-A89C-47B3-A5BA-854D281CA64C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>A0519E77-17B8-4FFE-8362-6D6698EAAEF8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>BDE709D8-ED98-49A5-9FE5-5EF15A748815</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>A8ACB6F0-8F5A-4860-8658-2486D2C773F6</key>
 		<array>
 			<dict>
@@ -27,17 +68,150 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>BDE709D8-ED98-49A5-9FE5-5EF15A748815</key>
+		<array/>
+		<key>BF7BCC7F-0852-40E3-AD3B-CFE7E9E0E73E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CD9E6694-3B70-4BB3-BDBC-3DB9B1931B6C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>CC17CE2E-D952-4F78-85DF-02A7762E53FC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E05B9827-C12C-4B7D-AD46-CE177FD2A4CF</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>CD9E6694-3B70-4BB3-BDBC-3DB9B1931B6C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>43242A37-C95B-4006-9C17-65A91D2B9878</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Slawdan</string>
 	<key>description</key>
-	<string>Search contact from wanxin db</string>
+	<string>Tools for the STUPID Wanxin</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>WX Contact</string>
+	<string>Wanxin Tools</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>20DED387-7681-45D4-9150-87A249C39B94</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>126</integer>
+				<key>keyword</key>
+				<string>wxchat</string>
+				<key>runningsubtext</key>
+				<string>Searching</string>
+				<key>script</key>
+				<string>python wxchatwf.py {query}</string>
+				<key>subtext</key>
+				<string>搜索万信聊天内容</string>
+				<key>title</key>
+				<string>内容</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>1AEA6989-27D7-4E59-BF45-32B08DD488A5</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Wanxin Msg Copied</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>B513BAD6-A89C-47B3-A5BA-854D281CA64C</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>wx</string>
+				<key>runningsubtext</key>
+				<string>searching...</string>
+				<key>script</key>
+				<string>python wxcontactwf.py {query}</string>
+				<key>subtext</key>
+				<string>搜索名字|邮箱|手机|电话，+C复制信息，Enter生成名片</string>
+				<key>title</key>
+				<string>搜索万信联系人</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A8ACB6F0-8F5A-4860-8658-2486D2C773F6</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -57,28 +231,33 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>127</integer>
+				<integer>1</integer>
 				<key>keyword</key>
-				<string>wx</string>
-				<key>runningsubtext</key>
-				<string>searching...</string>
-				<key>script</key>
-				<string>python wxcontactwf.py {query}</string>
+				<string>wxdown</string>
 				<key>subtext</key>
-				<string>搜索名字|邮箱|手机|电话，Cmd+C复制信息，Enter生成名片</string>
-				<key>title</key>
-				<string>搜索万信联系人</string>
-				<key>type</key>
-				<integer>0</integer>
+				<string>Browse the directory</string>
+				<key>text</key>
+				<string>万信下载文件浏览</string>
 				<key>withspace</key>
 				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>A8ACB6F0-8F5A-4860-8658-2486D2C773F6</string>
+			<string>A0519E77-17B8-4FFE-8362-6D6698EAAEF8</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>path</key>
+				<string>~/Library/Application Support/万达集团/万信/215729/DownFiles/{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.browseinalfred</string>
+			<key>uid</key>
+			<string>BDE709D8-ED98-49A5-9FE5-5EF15A748815</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -107,25 +286,206 @@
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>/usr/local/bin/fuck_wanxin -a</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CD9E6694-3B70-4BB3-BDBC-3DB9B1931B6C</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>fuckwx</string>
+				<key>subtext</key>
+				<string>万信清理</string>
+				<key>text</key>
+				<string>fuckwx</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>BF7BCC7F-0852-40E3-AD3B-CFE7E9E0E73E</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>Duplicated files and images are cleaned.</string>
+				<key>title</key>
+				<string>Wanxin Fucked</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>43242A37-C95B-4006-9C17-65A91D2B9878</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>Have inner peace ~~~</string>
+				<key>title</key>
+				<string>Wanxin FUCKING CLEANED！！！</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>E05B9827-C12C-4B7D-AD46-CE177FD2A4CF</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>script</key>
+				<string>rm -rf /Users/rodin/Library/Application\ Support/万达集团/万信/215729/DownFiles/*</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>CC17CE2E-D952-4F78-85DF-02A7762E53FC</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>fuckwxall</string>
+				<key>subtext</key>
+				<string>清空万信下载文件夹</string>
+				<key>text</key>
+				<string>fuckwxall</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>16F53546-4FCD-434B-8D13-030103559B92</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>16F53546-4FCD-434B-8D13-030103559B92</key>
+		<dict>
+			<key>ypos</key>
+			<real>620</real>
+		</dict>
+		<key>1AEA6989-27D7-4E59-BF45-32B08DD488A5</key>
+		<dict>
+			<key>ypos</key>
+			<real>90</real>
+		</dict>
+		<key>20DED387-7681-45D4-9150-87A249C39B94</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>43242A37-C95B-4006-9C17-65A91D2B9878</key>
+		<dict>
+			<key>ypos</key>
+			<real>480</real>
+		</dict>
 		<key>69FB4749-992C-4EAA-95A7-92E5B3CABBEA</key>
 		<dict>
 			<key>ypos</key>
-			<real>290</real>
+			<real>360</real>
+		</dict>
+		<key>A0519E77-17B8-4FFE-8362-6D6698EAAEF8</key>
+		<dict>
+			<key>ypos</key>
+			<real>350</real>
 		</dict>
 		<key>A8ACB6F0-8F5A-4860-8658-2486D2C773F6</key>
 		<dict>
 			<key>ypos</key>
 			<real>230</real>
 		</dict>
+		<key>B513BAD6-A89C-47B3-A5BA-854D281CA64C</key>
+		<dict>
+			<key>ypos</key>
+			<real>120</real>
+		</dict>
+		<key>BDE709D8-ED98-49A5-9FE5-5EF15A748815</key>
+		<dict>
+			<key>ypos</key>
+			<real>350</real>
+		</dict>
+		<key>BF7BCC7F-0852-40E3-AD3B-CFE7E9E0E73E</key>
+		<dict>
+			<key>ypos</key>
+			<real>470</real>
+		</dict>
+		<key>CC17CE2E-D952-4F78-85DF-02A7762E53FC</key>
+		<dict>
+			<key>ypos</key>
+			<real>620</real>
+		</dict>
+		<key>CD9E6694-3B70-4BB3-BDBC-3DB9B1931B6C</key>
+		<dict>
+			<key>ypos</key>
+			<real>470</real>
+		</dict>
 		<key>DA9D6718-C710-439F-980D-3426350B0990</key>
 		<dict>
 			<key>ypos</key>
-			<real>170</real>
+			<real>240</real>
+		</dict>
+		<key>E05B9827-C12C-4B7D-AD46-CE177FD2A4CF</key>
+		<dict>
+			<key>ypos</key>
+			<real>610</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>
