@@ -6,8 +6,10 @@ import glob
 import getopt
 import hashlib
 import wx
+import workflow
 
-base_dir = wx.USER_CONFIG['DOWN_DIR']
+base_dir = wx.USER_CONFIG['DOWN_DIR'].encode('u8')
+wf = workflow.Workflow()
 
 def pformat(n):
     return '{:,}'.format(n)
@@ -20,26 +22,28 @@ def any_in(keys, dic):
 
 
 def get_options(args):
-    args, files = getopt.getopt(args, "aid", ["all", "img", "dup"])
+    args, files = getopt.getopt(args, "Aaid", ["all", "img", "dup"])
 
     args = dict(args)
 
     result = {
             'img': None,
             'dup': None,
+            'all': None,
             }
 
     if any_in(['-i', '--img'], args):
         result['img'] = True
-        result['dup'] = False
 
     if any_in(['-d', '--dup'], args):
         result['dup'] = True
-        result['img'] = False
 
     if any_in(['-a', '--all'], args):
         result['img'] = True
         result['dup'] = True
+
+    if any_in(['-A'], args):
+        result['all'] = True
 
     return result
 
@@ -47,6 +51,33 @@ def get_options(args):
 def ask_user(prompt_words):
     return False
 
+
+def fuck_all():
+    c = 0
+    t = 0
+    ts = 0
+
+    for f in glob.iglob(base_dir + '/*'):
+        try:
+            fstat = os.stat(f)
+            fsize = fstat.st_size
+        except:
+            fsize = 0
+
+        t += 1
+        try:
+            os.unlink(f)
+            c += 1
+            ts += fsize
+            #print 'deleted file:', f
+        except:
+            pass
+            #print 'delete file failed:', f
+
+    #print '-' * 80
+    #print pformat(t), 'files found,', pformat(c), 'files deleted,', pformat(ts), "B disk space released."
+    wf.add_item("%s %s %s %s %s %s" % (pformat(t), 'files found,', pformat(c), 'files deleted,', pformat(ts), "B disk space released."))
+    return (c, ts)
 
 def fuck_images():
     c = 0
@@ -68,12 +99,14 @@ def fuck_images():
                 os.unlink(f)
                 c += 1
                 ts += fsize
-                print 'deleted image:', f
+                #print 'deleted image:', f
             except:
-                print 'delete image failed:', f
+                pass
+                #print 'delete image failed:', f
 
-    print '-' * 80
-    print pformat(t), 'images found,', pformat(c), 'images deleted,', pformat(ts), "B disk space released."
+    #print '-' * 80
+    #print pformat(t), 'images found,', pformat(c), 'images deleted,', pformat(ts), "B disk space released."
+    wf.add_item("%s %s %s %s %s %s" % (pformat(t), 'images found,', pformat(c), 'images deleted,', pformat(ts), "B disk space released."))
     return (c, ts)
 
 
@@ -95,7 +128,7 @@ def fuck_duplicates():
             for l in open(f, 'r'):
                 md5.update(l)
         except:
-            print 'calculate file digest failed:', f
+            #print 'calculate file digest failed:', f
             continue
 
         h = md5.hexdigest()
@@ -106,14 +139,16 @@ def fuck_duplicates():
                 os.unlink(f)
                 dc += 1
                 ts += fsize
-                print 'deleted dup file:', f
+                #print 'deleted dup file:', f
             except:
-                print 'delete dup file failed:', f
+                pass
+                #print 'delete dup file failed:', f
         else:
             hashes[h] = f
 
-    print '-' * 80
-    print pformat(ft), 'dup files found,', pformat(dc), 'files deleted,', pformat(ts), "B disk space released."
+    #print '-' * 80
+    #print pformat(ft), 'dup files found,', pformat(dc), 'files deleted,', pformat(ts), "B disk space released."
+    wf.add_item("%s %s %s %s %s %s" % (pformat(ft), 'dup files found,', pformat(dc), 'files deleted,', pformat(ts), "B disk space released."))
     return (dc, ts)
 
 
@@ -121,36 +156,29 @@ def fuck(options):
     dc = 0
     ts = 0
 
-    img_confirmed = False
-    if options['img'] == None:
-        img_confirmed = ask_user('Clean images (png,jpg,gif,bmp)? [Y/n]')
-
-    if img_confirmed or options['img']:
+    if options['img']:
         result = fuck_images()
         dc += result[0]
         ts += result[1]
 
-    dup_confirmed = False
-    if options['dup'] == None:
-        dup_confirmed = ask_user('Clean duplicate files? [Y/n]')
-
-    if dup_confirmed or options['dup']:
+    if options['dup']:
         result = fuck_duplicates()
         dc += result[0]
         ts += result[1]
 
-    if img_confirmed or options['img'] or dup_confirmed or options['dup']:
+    if options['all']:
+        result = fuck_all()
+        dc += result[0]
+        ts += result[1]
 
-        print '=' * 80
-        print 'Total', pformat(dc), 'files deleted,', pformat(ts), 'B disk space released.'
+    if options['img'] or options['dup'] or options['all']:
+
+        #print '=' * 80
+        #print 'Total', pformat(dc), 'files deleted,', pformat(ts), 'B disk space released.'
+        wf.add_item('%s %s %s %s %s' % ('Total', pformat(dc), 'files deleted,', pformat(ts), 'B disk space released.'))
+        wf.send_feedback()
     else:
-        print '''Usage: fuck_wanxin [options]
-        \rShow usage.\n\r
-        \rOptions:
-        -i, --img   clean images.
-        -d, --dup   clean duplicate files.
-        -a, --all   clean all.
-        '''
+        pass
 
 
 def main():
