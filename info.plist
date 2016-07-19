@@ -38,6 +38,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>7961F7C6-AC1D-4075-B624-0B016C50EF19</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9FCC4AA3-4101-4D00-9748-2F029A418AAA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>A0519E77-17B8-4FFE-8362-6D6698EAAEF8</key>
 		<array>
 			<dict>
@@ -292,7 +303,7 @@
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>/usr/local/bin/fuck_wanxin -a</string>
+				<string>python fuck_wanxin.py -a</string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -380,7 +391,7 @@
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>script</key>
-				<string>rm -rf /Users/rodin/Library/Application\ Support/万达集团/万信/215729/DownFiles/*</string>
+				<string>rm -rf /Users/rodin/Library/Application\ Support/万达集团/万信/*/DownFiles/*</string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
@@ -409,6 +420,44 @@
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>16F53546-4FCD-434B-8D13-030103559B92</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>wanxin</string>
+				<key>subtext</key>
+				<string>打开万信</string>
+				<key>text</key>
+				<string>wanxin</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>7961F7C6-AC1D-4075-B624-0B016C50EF19</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/万信.app</string>
+				</array>
+				<key>toggle</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>9FCC4AA3-4101-4D00-9748-2F029A418AAA</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -441,6 +490,16 @@
 		<dict>
 			<key>ypos</key>
 			<real>360</real>
+		</dict>
+		<key>7961F7C6-AC1D-4075-B624-0B016C50EF19</key>
+		<dict>
+			<key>ypos</key>
+			<real>740</real>
+		</dict>
+		<key>9FCC4AA3-4101-4D00-9748-2F029A418AAA</key>
+		<dict>
+			<key>ypos</key>
+			<real>740</real>
 		</dict>
 		<key>A0519E77-17B8-4FFE-8362-6D6698EAAEF8</key>
 		<dict>

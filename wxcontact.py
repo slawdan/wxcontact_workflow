@@ -5,12 +5,10 @@ import os
 import sys
 import glob
 import unicodedata
-import sqlite3
 import getopt
+import wx
 
 '''
-{$HOME}/Library/Application Support/万达集团/万信/{wxuserid}/userdata.db
-
 UserinfoTb:
     UserId,CnUserName,EnUserName,UserCode,Sex,Addr,Post,Tel,Phone,Email,PostCode,Fax,UpdateType,UpdateTime
 '''
@@ -29,21 +27,6 @@ FIELDSET = {
         'full': (FULL_FIELDS, FULL_FIELDS_CN),
         'simple': (FIELDS, FIELDS_CN)
         }
-
-
-def locate_db():
-
-    dbpath = glob.glob(WX_PATH_PAT)
-
-    if not len(dbpath):
-        return False
-
-    return dbpath[0]
-
-
-def open_db(path):
-    db = sqlite3.connect(path)
-    return db.cursor()
 
 
 def find_users(c, user, f):
@@ -96,12 +79,8 @@ def show_help():
 
 
 def search_user(query, use_full):
-    dbpath = locate_db()
-    if not dbpath:
-        return False
-
     fields_db, fields_cn = FIELDSET['full' if use_full else 'simple']
-    cursor = open_db(dbpath)
+    cursor = wx.open_userdata_db()
     users = find_users(cursor, query, fields_db)
 
     return users

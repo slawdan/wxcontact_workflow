@@ -8,38 +8,12 @@ import unicodedata
 import sqlite3
 import getopt
 
-'''
-{$HOME}/Library/Application Support/万达集团/万信/{wxuserid}/userdata.db
+import wx
 
+'''
 UserinfoTb:
     UserId,CnUserName,EnUserName,UserCode,Sex,Addr,Post,Tel,Phone,Email,PostCode,Fax,UpdateType,UpdateTime
 '''
-
-HOME = os.getenv('HOME', '/Users/*')
-
-WX_PATH_PAT = HOME + r'/Library/Application Support/万达集团/万信/*/userdata.db'
-
-def locate_db():
-
-    dbpath = glob.glob(WX_PATH_PAT)
-
-    if not len(dbpath):
-        return False
-
-    return dbpath[0]
-
-
-def open_db(path):
-    db = sqlite3.connect(path)
-    return db.cursor()
-
-
-def find_users(c, user, f):
-    sql = "select %s from UserinfoTb u left join UserDeptInfoTb ud on ud.userid=u.userid left join DeptInfoTb d on d.deptid=ud.deptid where u.CnUserName like :key or u.EnUserName like :key or u.UserCode like :key or u.Tel like :key or u.Phone like :key or u.Email like :key order by u.UserCode" % f
-    key = "%" + user + "%"
-    c.execute(sql, {"key": key})
-    return c.fetchall()
-
 
 def width(s):
     if not s:
@@ -77,24 +51,8 @@ def show_help():
     sys.stderr.write('  {query}  Search keyword. Can be any of %s\n' % SEARCH_FIELDS)
 
 
-def search_user(query, use_full):
-    dbpath = locate_db()
-    if not dbpath:
-        return False
-
-    fields_db, fields_cn = FIELDSET['full' if use_full else 'simple']
-    cursor = open_db(dbpath)
-    users = find_users(cursor, query, fields_db)
-
-    return users
-
-
 def search_chat(words):
-    dbpath = locate_db()
-    if not dbpath:
-        return False
-
-    cursor = open_db(dbpath)
+    cursor = wx.open_userdata_db()
     sql = "select isgroup, ssiontitle title, msgcontent, sendtime, userinfotb.cnusername username, usercode from MessageTb join userinfotb on sendid=userinfotb.userid join sessioninfotb on messagetb.ssionid=sessioninfotb.ssionid where %s order by sendtime desc limit 10"
     keys = dict((('key_%s' % i, u'%%%s%%' % words[i]) for i in xrange(len(words))))
     where = ' and '.join(("Msgcontent like :key_%s" % i for i in xrange(len(words))))

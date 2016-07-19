@@ -1,16 +1,17 @@
 #encoding: utf8
 import sys
 import workflow
-import wxcontact as wx
+import wxcontact as wxc
 
 
 def pretty_mobile(s):
     return '%s-%s-%s' % (s[:3], s[3: 7], s[7:]) if s else ''
 
+
 def main(wf):
 
     query = wf.args[0]
-    users = wx.search_user(query, True)
+    users = wxc.search_user(query, True)
 
     if users == False:
         raise Exception('Open wanxin userdata.db failed')
