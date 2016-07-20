@@ -9,6 +9,7 @@ import wx
 import workflow
 
 base_dir = wx.USER_CONFIG['DOWN_DIR'].encode('u8')
+applog_dir = wx.APP_CONFIG['APP_DIR'] + '/AppLogs'
 wf = workflow.Workflow()
 
 def pformat(n):
@@ -69,14 +70,30 @@ def fuck_all():
             os.unlink(f)
             c += 1
             ts += fsize
-            #print 'deleted file:', f
         except:
             pass
-            #print 'delete file failed:', f
 
-    #print '-' * 80
-    #print pformat(t), 'files found,', pformat(c), 'files deleted,', pformat(ts), "B disk space released."
-    wf.add_item("%s %s %s %s %s %s" % (pformat(t), 'files found,', pformat(c), 'files deleted,', pformat(ts), "B disk space released."))
+    import time
+    now = time.time()
+
+    for f in glob.iglob(applog_dir + '/*'):
+        try:
+            fstat = os.stat(f)
+            fsize = fstat.st_size
+            ftime = fstat.st_ctime
+        except:
+            fsize = 0
+            ftime = now
+
+        if ftime < now - 86400 * 2:
+            try:
+                os.unlink(f)
+                c += 1
+                ts += fsize
+            except:
+                pass
+
+    #print ("%s %s %s %s\n%s %s" % (pformat(t), 'files found,', pformat(c), 'files deleted,', pformat(ts), "B disk space freed."))
     return (c, ts)
 
 def fuck_images():
@@ -84,7 +101,6 @@ def fuck_images():
     t = 0
     ts = 0
 
-    #for f in glob.iglob(base_dir + '/*.{[jJ][pP][gG],[bB][mM][pP],[pP][nN][gG],[gG][iI][fF]}'):
     exts = ['[jJ][pP][gG]', '[bB][mM][pP]', '[pP][nN][gG]', '[gG][iI][fF]']
     for ext in exts:
         for f in glob.iglob(base_dir + '/*.' + ext):
@@ -99,14 +115,10 @@ def fuck_images():
                 os.unlink(f)
                 c += 1
                 ts += fsize
-                #print 'deleted image:', f
             except:
                 pass
-                #print 'delete image failed:', f
 
-    #print '-' * 80
-    #print pformat(t), 'images found,', pformat(c), 'images deleted,', pformat(ts), "B disk space released."
-    wf.add_item("%s %s %s %s %s %s" % (pformat(t), 'images found,', pformat(c), 'images deleted,', pformat(ts), "B disk space released."))
+    #print ("%s %s %s %s\n%s %s" % (pformat(t), 'images found,', pformat(c), 'images deleted,', pformat(ts), "B disk space freed."))
     return (c, ts)
 
 
@@ -128,7 +140,6 @@ def fuck_duplicates():
             for l in open(f, 'r'):
                 md5.update(l)
         except:
-            #print 'calculate file digest failed:', f
             continue
 
         h = md5.hexdigest()
@@ -139,16 +150,11 @@ def fuck_duplicates():
                 os.unlink(f)
                 dc += 1
                 ts += fsize
-                #print 'deleted dup file:', f
             except:
                 pass
-                #print 'delete dup file failed:', f
         else:
             hashes[h] = f
 
-    #print '-' * 80
-    #print pformat(ft), 'dup files found,', pformat(dc), 'files deleted,', pformat(ts), "B disk space released."
-    wf.add_item("%s %s %s %s %s %s" % (pformat(ft), 'dup files found,', pformat(dc), 'files deleted,', pformat(ts), "B disk space released."))
     return (dc, ts)
 
 
@@ -172,11 +178,7 @@ def fuck(options):
         ts += result[1]
 
     if options['img'] or options['dup'] or options['all']:
-
-        #print '=' * 80
-        #print 'Total', pformat(dc), 'files deleted,', pformat(ts), 'B disk space released.'
-        wf.add_item('%s %s %s %s %s' % ('Total', pformat(dc), 'files deleted,', pformat(ts), 'B disk space released.'))
-        wf.send_feedback()
+        print ('清除 %s 个文件，\n释放 %sB 空间' % (pformat(dc), pformat(ts)))
     else:
         pass
 

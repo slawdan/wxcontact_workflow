@@ -37,6 +37,14 @@
 				<key>modifiersubtext</key>
 				<string></string>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>D973EAAB-7FD0-4AA6-B978-805DD1218362</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>大字体显示聊天内容</string>
+			</dict>
 		</array>
 		<key>32135ABE-4680-4ED1-BFD0-93D39F0C85CC</key>
 		<array>
@@ -52,7 +60,7 @@
 				<key>destinationuid</key>
 				<string>712CA8DD-2A12-49A3-BBCB-617F393BF901</string>
 				<key>modifiers</key>
-				<integer>262144</integer>
+				<integer>1048576</integer>
 				<key>modifiersubtext</key>
 				<string>在Finder中查看</string>
 			</dict>
@@ -70,6 +78,14 @@
 		</array>
 		<key>A8ACB6F0-8F5A-4860-8658-2486D2C773F6</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D973EAAB-7FD0-4AA6-B978-805DD1218362</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>DA9D6718-C710-439F-980D-3426350B0990</string>
@@ -160,7 +176,7 @@
 				<key>script</key>
 				<string>python wxchatwf.py {query}</string>
 				<key>subtext</key>
-				<string>Enter 拷贝到剪贴板</string>
+				<string>Enter 拷贝到剪贴板，Cmd+Enter 大字体查看</string>
 				<key>title</key>
 				<string>wxchat 内容 - 搜索万信聊天记录</string>
 				<key>type</key>
@@ -191,12 +207,35 @@
 				<key>text</key>
 				<string>{query}</string>
 				<key>title</key>
-				<string>Wanxin Msg Copied</string>
+				<string>Wanxin 聊天内容已复制</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>B513BAD6-A89C-47B3-A5BA-854D281CA64C</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.output.largetype</string>
+			<key>uid</key>
+			<string>D973EAAB-7FD0-4AA6-B978-805DD1218362</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>DA9D6718-C710-439F-980D-3426350B0990</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -226,21 +265,6 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>A8ACB6F0-8F5A-4860-8658-2486D2C773F6</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>DA9D6718-C710-439F-980D-3426350B0990</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -294,9 +318,9 @@
 				<key>keyword</key>
 				<string>wxclear</string>
 				<key>subtext</key>
-				<string>清理万信下载目录重复文件和图片</string>
+				<string>清理万信下载文件夹中的重复文件和图片</string>
 				<key>text</key>
-				<string>wxclear - 清理万信下载目录</string>
+				<string>wxclear - 清理万信下载文件夹</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -321,9 +345,9 @@
 				<key>sticky</key>
 				<false/>
 				<key>text</key>
-				<string>Duplicated files and images are cleaned.</string>
+				<string>{query}</string>
 				<key>title</key>
-				<string>Wanxin Fucked</string>
+				<string>Wanxin 图片和重复文件已经清理</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -346,9 +370,9 @@
 				<key>sticky</key>
 				<false/>
 				<key>text</key>
-				<string>Have inner peace ~~~</string>
+				<string>{query}</string>
 				<key>title</key>
-				<string>Wanxin FUCKING CLEANED！！！</string>
+				<string>Wanxin 下载文件夹和程序日志已清理</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.output.notification</string>
@@ -382,9 +406,9 @@
 				<key>keyword</key>
 				<string>wxclearall</string>
 				<key>subtext</key>
-				<string>清空万信下载文件夹下所有文件</string>
+				<string>清空万信下载文件夹下所有文件和应用日志</string>
 				<key>text</key>
-				<string>wxclearall - 清空万信下载文件夹</string>
+				<string>wxclearall - 清空万信产生的各种文件</string>
 				<key>withspace</key>
 				<false/>
 			</dict>
@@ -486,12 +510,12 @@
 		<key>16F53546-4FCD-434B-8D13-030103559B92</key>
 		<dict>
 			<key>ypos</key>
-			<real>620</real>
+			<real>740</real>
 		</dict>
 		<key>1AEA6989-27D7-4E59-BF45-32B08DD488A5</key>
 		<dict>
 			<key>ypos</key>
-			<real>90</real>
+			<real>10</real>
 		</dict>
 		<key>20DED387-7681-45D4-9150-87A249C39B94</key>
 		<dict>
@@ -501,42 +525,42 @@
 		<key>32135ABE-4680-4ED1-BFD0-93D39F0C85CC</key>
 		<dict>
 			<key>ypos</key>
-			<real>950</real>
+			<real>1210</real>
 		</dict>
 		<key>43242A37-C95B-4006-9C17-65A91D2B9878</key>
 		<dict>
 			<key>ypos</key>
-			<real>480</real>
+			<real>580</real>
 		</dict>
 		<key>69FB4749-992C-4EAA-95A7-92E5B3CABBEA</key>
 		<dict>
 			<key>ypos</key>
-			<real>360</real>
+			<real>470</real>
 		</dict>
 		<key>712CA8DD-2A12-49A3-BBCB-617F393BF901</key>
 		<dict>
 			<key>ypos</key>
-			<real>1030</real>
+			<real>1290</real>
 		</dict>
 		<key>7961F7C6-AC1D-4075-B624-0B016C50EF19</key>
 		<dict>
 			<key>ypos</key>
-			<real>740</real>
+			<real>970</real>
 		</dict>
 		<key>9FCC4AA3-4101-4D00-9748-2F029A418AAA</key>
 		<dict>
 			<key>ypos</key>
-			<real>740</real>
+			<real>970</real>
 		</dict>
 		<key>A05698DA-F458-427F-BDB2-CBBDEA116BD4</key>
 		<dict>
 			<key>ypos</key>
-			<real>880</real>
+			<real>1160</real>
 		</dict>
 		<key>A8ACB6F0-8F5A-4860-8658-2486D2C773F6</key>
 		<dict>
 			<key>ypos</key>
-			<real>230</real>
+			<real>360</real>
 		</dict>
 		<key>B513BAD6-A89C-47B3-A5BA-854D281CA64C</key>
 		<dict>
@@ -546,30 +570,35 @@
 		<key>BF7BCC7F-0852-40E3-AD3B-CFE7E9E0E73E</key>
 		<dict>
 			<key>ypos</key>
-			<real>470</real>
+			<real>580</real>
 		</dict>
 		<key>CC17CE2E-D952-4F78-85DF-02A7762E53FC</key>
 		<dict>
 			<key>ypos</key>
-			<real>620</real>
+			<real>740</real>
 		</dict>
 		<key>CD9E6694-3B70-4BB3-BDBC-3DB9B1931B6C</key>
 		<dict>
 			<key>ypos</key>
-			<real>470</real>
+			<real>580</real>
+		</dict>
+		<key>D973EAAB-7FD0-4AA6-B978-805DD1218362</key>
+		<dict>
+			<key>ypos</key>
+			<real>230</real>
 		</dict>
 		<key>DA9D6718-C710-439F-980D-3426350B0990</key>
 		<dict>
 			<key>ypos</key>
-			<real>240</real>
+			<real>340</real>
 		</dict>
 		<key>E05B9827-C12C-4B7D-AD46-CE177FD2A4CF</key>
 		<dict>
 			<key>ypos</key>
-			<real>610</real>
+			<real>740</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>
-	<string>http://slawdan.github.io</string>
+	<string>http://github.com/slawdan/wxcontact</string>
 </dict>
 </plist>
